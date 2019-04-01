@@ -1,0 +1,13 @@
+<launch>
+
+  <include file="$(find realsense2_camera)/launch/rs_maplab.launch"/>
+
+  <include file="$(find mocap_optitrack)/launch/cam_mocap_calib.launch"/>
+
+  <node pkg="tf" type="static_transform_publisher" name="create_world_frame" args="0 0 0 0 0 0 1 world mocap 100" />
+
+  <node pkg="tf" type="static_transform_publisher" name="cvtCameraFrame" args="0 0 0 0.5 -0.5 0.5 0.5 camera_opencv camera_aligned_depth_to_color_frame 100" />
+
+  <node pkg="cam_mocap_calib" type="cam_mocap_calib" name="cam_mocap_calib"/>
+
+</launch>
